@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="../src/output.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tailwind Grid layout</title>
+</head>
+
+<body class="m-0 p-0 box-border font-sans">
+
+
+  <div class="grid grid-cols-2 grid-rows-[90px_90px_90px_300px_1fr] gap-2 p-2  max-[600px]:grid-cols-2 max-[600px]:grid-rows-[70px_70px_70px_70px_150px_70px]">
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black row-span-2 max-[600px]:col-span-2 max-[600px]:row-auto">Item 1</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black max-[600px]:col-span-2 max-[600px]:row-auto">Item 2</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black row-start-3 row-span-1 max-[600px]:col-span-2 max-[600px]:row-auto">Item 3</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black row-start-2 row-span-2 col-start-2 max-[600px]:col-span-2 max-[600px]:row-auto">Item 4</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black row-start-4 col-span-2 max-[600px]:col-span-2 max-[600px]:row-auto">Item 5</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black ">Item 6</div>
+    <div class="bg-gray-100 p-2.5 text-3xl text-center border-2 border-black">Item 7</div>
+  </div>
+</body>
+
+</html>
