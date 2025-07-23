@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Moja strona{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen">
+
+    <header class="bg-blue-600 text-white p-4 flex-none h-[20vh]">
+        <h1 class="text-3xl font-bold">Moja strona w Django</h1>
+        <nav class="mt-2">
+            <a href="{% url 'home' %}" class="mr-4 hover:underline">Strona główna</a>
+            <a href="{% url 'about' %}" class="mr-4 hover:underline">O nas</a>
+            <a href="{% url 'contact' %}" class="mr-4 hover:underline">Kontakt</a>
+            <a href="{% url 'scraping' %}" class="hover:underline">Scraping</a>
+        </nav>
+    </header>
+
+    <main class="p-4 flex-1 h-[70vh] grid grid-cols-4 gap-4">
+        <aside class="col-span-4 bg-white p-4 shadow rounded md:col-span-1">
+            <h2 class="text-xl font-semibold">Menu boczne</h2>
+            <ul class="mt-2 list-disc list-inside">
+                <li>Opcja 1</li>
+                <li>Opcja 2</li>
+            </ul>
+        </aside>
+
+        <section class="col-span-4 bg-white p-4 shadow rounded md:col-span-3">
+            {% block content %}
+
+            {% endblock %}
+        </section>
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 text-center mt-4 flex-none h-[10vh]">
+        &copy; 2025 Moja strona
+    </footer>
+
+</body>
+</html>
