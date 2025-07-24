@@ -3,31 +3,49 @@
 {% block title %}Scraping{% endblock %}
 
 {% block content %}
-    <h2 class="text-2xl font-bold mb-4">Welcome to Web Scraping</h2>
-    <p>Counting forms in page!</p> <br>
-    <form method="post" >
-       {% csrf_token %}
-      <label for="url" class="text-xl font-semibold">Url:</label>
-      <input 
-      type="url" 
-      name="url" 
-      id="url" 
-      placeholder="https://example.com"  
-      required
-      value="{{ url|default:'' }}"
-      class="w-[70%] p-2 mb-4 border border-gray-300 rounded">
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Scrape</button>
-    </form>
+<h2 class="text-2xl font-bold mb-4">Welcome to Web Scraping</h2>
+<p>Counting forms in page!</p><br>
 
-   {% if form_count > 0 %}
-      <h2 class="text-xl font-bold mb-2">Znaleziono {{ form_count }} formularz{{ form_count|pluralize:",e" }}</h2>
-        <ul class="list-disc pl-5">
-            {% for id in form_id %}
-                <li>{{ id }}</li>
-            {% endfor %}
-        </ul>
-   {% elif html_scrape %}
-      <h2 class="text-xl font-bold mb-2 pb-1">Nie znaleziono żadnych formularzy.</h2>
-   {% endif %}
+<form method="post">
+    {% csrf_token %}
+    <label for="url" class="text-xl font-semibold">Url:</label>
+    <input 
+        type="url" 
+        name="url" 
+        id="url" 
+        placeholder="https://example.com"  
+        required
+        value="{{ url|default:'' }}"
+        class="w-[70%] p-2 mb-4 border border-gray-300 rounded">
+    <button type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Scrape
+    </button>
+</form>
+
+{% if form_count > 0 %}
+    <h2 class="text-xl font-bold mb-2">Znaleziono {{ form_count }} formularz{{ form_count|pluralize:",e" }}</h2>
+    <ul class="list-disc pl-5 space-y-2">
+        {% for index, identifier in form_identifiers %}
+        <li>
+            <form method="post" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="url" value="{{ url }}">
+                <input type="hidden" name="selected_form_index" value="{{ index }}">
+                <button type="submit"
+                    class="text-blue-600 underline hover:text-blue-800">
+                    Pokaż {{ identifier }}
+                </button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+{% elif form_count == 0 %}
+    <p class="text-red-500">Nie znaleziono formularzy lub wystąpił błąd.</p>
+{% endif %}
+
+{% if selected_form_html %}
+    <h3 class="mt-6 text-lg font-semibold">Kod wybranego formularza:</h3>
+    <pre class="bg-gray-100 border p-4 overflow-auto text-sm">{{ selected_form_html }}</pre>
+{% endif %}
 {% endblock %}
